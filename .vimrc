@@ -30,6 +30,7 @@ set noswapfile
 set number relativenumber
 set timeoutlen=1000 ttimeoutlen=0
 set colorcolumn=81
+set cursorline
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -47,6 +48,9 @@ set expandtab
 autocmd FileType c,cpp,asm setlocal shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType go,python setlocal shiftwidth=4 tabstop=4
 
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+nnoremap <Leader>c :set cursorline!<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vim-plug For Managing Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -57,7 +61,7 @@ call plug#begin('~/.vim/plugged')
 
 " Optionnal Plugins
 " Plug 'tpope/vim-surround'
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 " Plug 'majutsushi/tagbar'
 " Plug 'tpope/vim-fugitive'
 " Plug 'lervag/vimtex'
@@ -65,6 +69,7 @@ Plug 'sheerun/vim-polyglot'                     " Language highlighting pack
 
 " Themes Plugins
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'dikiaap/minimalist'
 
 " Essential Plugins
@@ -95,8 +100,9 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_auto_colors = 0
 let g:vimtex_compiler_progname = 'nvr'
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#333747 ctermbg=0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333747 ctermbg=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#3B4252 ctermbg=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3B4252 ctermbg=0
+set statusline+=%{gutentags#statusline()}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Remap Keys
@@ -335,10 +341,12 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " => Theme and colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color scheme
-colorscheme palenight
+colorscheme nord
 
 " Same background as terminal
 hi Normal guibg=NONE ctermbg=NONE
+hi SignColumn guibg=NONE ctermbg=NONE
+hi VertSplit ctermbg=NONE guibg=NONE
 
 " Italics for my favorite color scheme
 " let g:palenight_terminal_italics=1
@@ -368,7 +376,7 @@ let g:Powerline_theme='long'
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='palenight'
+let g:airline_theme='nord'
 silent! call airline#extensions#whitespace#disable()
 
 " Uncomment to prevent non-normal modes showing in powerline and below powerline.
