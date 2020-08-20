@@ -1,4 +1,3 @@
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " __   _(_)_ __ ___  _ __ ___
 " \ \ / / | '_ ` _ \| '__/ __|
@@ -6,7 +5,7 @@
 "   \_/ |_|_| |_| |_|_|  \___|
 "
 " VIM config file - Jonny Saykosy
-" Install vimplug first: https://github.com/junegunn/vim-plug
+" Plugins managed by vimplug: https://github.com/junegunn/vim-plug
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 filetype plugin indent on
@@ -17,12 +16,11 @@ set nocompatible
 set showmatch               " Show matching brackets.
 set ignorecase              " Do case insensitive matching
 set autoindent              " Indent a new line the same amount as the previous one
-set tags^=.git/tags;~		" Look for ctags file in .git/
-set foldmethod=manual		" Lines folding method
+set foldmethod=manual		    " Lines folding method
 set signcolumn=yes
 set splitbelow splitright
-set path+=**				" Searches current directory recursively.
-set wildmenu				" Display all matches when tab complete.
+set path+=**				        " Searches current directory recursively.
+set wildmenu				        " Display all matches when tab complete.
 set incsearch
 set hlsearch                " Highlight search results
 set nobackup
@@ -31,25 +29,27 @@ set number relativenumber
 set timeoutlen=1000 ttimeoutlen=0
 set colorcolumn=81
 set cursorline
+set autochdir
+" set tags^=.git/tags;~		    " Look for ctags file in .git/
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Be smart when using tabs ;)
 set smarttab
+
+set shiftwidth=2
+set tabstop=2
 
 " Expandtab option sets 1 tab == 4 spaces
 " It is needed for good indentations in Python and vim-indent-guides plugin
-set shiftwidth=2
-set tabstop=2
 set expandtab
 
 " Filetype indent
 autocmd FileType c,cpp,asm setlocal shiftwidth=4 tabstop=4 noexpandtab
 autocmd FileType go,python setlocal shiftwidth=4 tabstop=4
 
+" Cursorline highlighting
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-nnoremap <Leader>c :set cursorline!<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vim-plug For Managing Plugins
@@ -63,29 +63,25 @@ call plug#begin('~/.vim/plugged')
 " Plug 'tpope/vim-surround'
 Plug 'ludovicchabant/vim-gutentags'
 " Plug 'majutsushi/tagbar'
-" Plug 'tpope/vim-fugitive'
-" Plug 'lervag/vimtex'
+Plug 'lervag/vimtex'
 Plug 'sheerun/vim-polyglot'                     " Language highlighting pack
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " Themes Plugins
-Plug 'drewtempelmeyer/palenight.vim'
 Plug 'arcticicestudio/nord-vim'
-Plug 'dikiaap/minimalist'
+Plug 'vim-airline/vim-airline'				          " Airline
 
 " Essential Plugins
-Plug 'mhinz/vim-startify'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Auto-completion
 Plug 'honza/vim-snippets' 						          " Snippets
 Plug 'scrooloose/nerdtree'				              " NERDTree
 Plug 'kien/ctrlp.vim' 							            " Ctrl+P fuzzy finder
-
 Plug 'pbondoer/vim-42header' 					          " 42 Header
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter' 					        " Git diff indicators
 Plug 'jiangmiao/auto-pairs' 					          " Autopairing brackets, parentheses, etc
 Plug 'ntpeters/vim-better-whitespace' 			    " Highlight trailing whitespaces in red
 
-Plug 'vim-airline/vim-airline'				          " Airline
 Plug 'ryanoasis/vim-devicons' 					        " Filetype icons. Always load this plugin as the very last
 
 call plug#end()
@@ -99,26 +95,28 @@ let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_auto_colors = 0
-let g:vimtex_compiler_progname = 'nvr'
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#3B4252 ctermbg=0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3B4252 ctermbg=0
 set statusline+=%{gutentags#statusline()}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Remap Keys
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Disable arrow keys in Normal mode
-" no <Up> <Nop>
-" no <Down> <Nop>
-" no <Left> <Nop>
-" no <Right> <Nop>
+" settings for vimtex
+let g:tex_flavor = 'latex'
+let g:vimtex_compiler_latexmk = {
+         \ 'build_dir' : 'build',
+         \}
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_general_options
+    \ = '-reuse-instance -forward-search @tex @line @pdf'
+let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 
-" Disable arrow keys in Insert mode
-" ino <Up> <Nop>
-" ino <Down> <Nop>
-" ino <Left> <Nop>
-" ino <Right> <Nop>
+" settings for markdown-preview
+let g:mkdp_auto_close=0
+let g:mkdp_refresh_slow=1
+let g:mkdp_markdown_css='/home/jonny/.scripts/github-markdown.css'
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Keymapping
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Moving between buffers
 nnoremap <C-W><C-H> :bprevious<CR>
 nnoremap <C-W><C-L> :bnext<CR>
@@ -140,61 +138,14 @@ nmap <F8> :TagbarToggle<CR>
 " Indent guides toggle
 nmap <F5> :IndentGuidesToggle<CR>
 
+" Toggle markdown preview in browser
+nmap <F2> <Plug>MarkdownPreviewToggle
+
 " Hit return in normal mode to disable highlighting word
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Startify
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:startify_bookmarks = [ {'c': '~/.vimrc'}, '~/.vim/startify.vim']
-let g:startify_change_to_dir = 1
-let g:startify_change_to_vcs_root = 1
-let g:ascii = [
-        \ '	           __',
-        \ '	   .--.--.|__|.--------.',
-        \ '	   |  |  ||  ||        |',
-        \ '	    \___/ |__||__|__|__|',
-        \ ''
-        \]
-let g:startify_custom_header = g:ascii + startify#fortune#boxed()
-let g:startify_enable_special = 1
-let g:startify_lists = [
-          \ { 'type': 'files',     'header': ['   MRU'] },
-          \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-          \ { 'type': 'sessions',  'header': ['   Sessions'] },
-          \ { 'type': 'bookmarks', 'header': ['   Bookmarks'] }
-          \ ]
-let g:startify_skiplist = [
-        \ '^/tmp',
-        \ '.swap$',
-        \ '.tmp$',
-        \ ]
-let g:startify_update_oldfiles = 1
-
-" For Misc options
-let g:startify_commands = []
-let g:startify_disable_at_vimenter = 0
-let g:startify_enable_unsafe = 0
-let g:startify_files_number = 5
-let g:startify_fortune_use_unicode = 0
-let g:startify_padding_left = 4
-let g:startify_relative_path = 1
-let g:startify_use_env = 1
-
-" For Sessions
-let g:startify_session_autoload = 1
-let g:startify_session_before_save = ['echo "Saving this session ..."']
-let g:startify_session_delete_buffers = 0
-let g:startify_session_dir = '~/.vim/session'
-let g:startify_session_number = 20
-let g:startify_session_persistence = 1
-let g:startify_session_remove_lines = ['setlocal', 'winheight']
-let g:startify_session_savecmds = ['echo "Saved a session."']
-let g:startify_session_savevars = [
-           \ 'g:startify_session_savevars',
-           \ 'g:startify_session_savecmds',
-           \ ]
-let g:startify_session_sort = 1
+" Enable/disable cursorline
+nnoremap <Leader>c :set cursorline!<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Coc.nvim general configuration
@@ -348,9 +299,6 @@ hi Normal guibg=NONE ctermbg=NONE
 hi SignColumn guibg=NONE ctermbg=NONE
 hi VertSplit ctermbg=NONE guibg=NONE
 
-" Italics for my favorite color scheme
-" let g:palenight_terminal_italics=1
-
 " It is necessary for vim true colors in Tmux
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -385,9 +333,6 @@ set noshowmode
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => NERDTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Uncomment to autostart the NERDTree
-" autocmd vimenter * NERDTree
-
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
@@ -408,4 +353,3 @@ let NERDTreeDirArrows = 1
 " => Removes pipes | that act as seperators on splits
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set fillchars+=vert:\ 
-
