@@ -1,0 +1,4 @@
+#!/bin/bash
+
+xrandr --output eDP1 --auto --output DP2 --auto --scale 2x2 --right-of eDP1
+feh --bg-scale /usr/share/backgrounds/nord.jpg /usr/share/backgrounds/nord.jpg

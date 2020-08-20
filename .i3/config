@@ -6,7 +6,7 @@
 #    By: jonny <josaykos@student.42.fr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/10 17:32:49 by jonny             #+#    #+#              #
-#    Updated: 2020/07/14 12:34:33 by jonny            ###   ########.fr        #
+#    Updated: 2020/08/16 12:09:05 by jonny            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -203,14 +203,13 @@ assign [class="firefox"] $ws2
 assign [class="Brave-browser"] $ws2
 assign [class="Pcmanfm"] $ws3
 assign [class="VirtualBox Manager"] $ws4
+assign [class="VSCodium"] $ws4
 assign [class="Slack"] $ws5
 assign [class="discord"] $ws5
 assign [class="Thunderbird"] $ws6
 assign [class="Rambox"] $ws6
 assign [class="Spotify"] $ws8
 assign [class="spotify"] $ws8
-assign [class="Spotify Premium"] $ws8
-assign [class="spotify premium"] $ws8
 assign [class="Olivia"] $ws8
 # assign [class="Skype"] $ws5
 
@@ -311,18 +310,17 @@ bindsym $mod+9 exec --no-startup-id $HOME/.scripts/betterlockscreen --lock blur
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; picom -b
-#exec --no-startup-id manjaro-hello
+exec --no-startup-id "$HOME/.scripts/dual-monitor"
+exec --no-startup-id sleep 1; picom -b
+exec --no-startup-id nextcloud
+# exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
-# exec --no-startup-id pamac-tray
-exec --no-startup-id clipit
+# exec --no-startup-id clipit
 # exec --no-startup-id blueman-applet
-# exec_always --no-startup-id sbxkb
-exec --no-startup-id start_conky_maia
+# exec --no-startup-id start_conky_maia
 exec --no-startup-id fcitx -d
-# exec --no-startup-id start_conky_green
-exec --no-startup-id xautolock -time 20 -locker "$HOME/.scripts/betterlockscreen --lock blur"
+exec --no-startup-id xautolock -time 60 -locker "$HOME/.scripts/betterlockscreen --lock blur"
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id alttab -w 1 -d 2

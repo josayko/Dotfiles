@@ -4,6 +4,8 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 # fix "xdg-open fork-bomb" export your preferred browser from here
 export BROWSER=/usr/bin/firefox
 
+export PATH=$HOME/.scripts/:$HOME/Applications:/usr/local/go/bin:$HOME/go/bin:$PATH
+
 # UI element scaling, icons
 # export GDK_SCALE=2
 # export QT_SCALE_FACTOR=2
@@ -17,6 +19,7 @@ export AUDIODRIVER=alsa
 
 # aliases
 alias vim=nvim
+alias rm="rm -I"
 alias v=vim
 alias t=tmux
 alias gcc=clang
