@@ -26,6 +26,13 @@ alias gcc=clang
 alias newsboat="uxterm newsboat"
 alias norminette="~/.norminette/norminette.rb"
 
+#changing "ls" to "exa"
+alias ls='exa -lg --color=always --group-directories-first'
+alias ll='exa -alg --color=always --group-directories-first'
+alias lt='tree'
+alias lta='exa -aT --color=always --group-directories-first'
+alias l.='exa -a | egrep "^\."'
+
 # caps lock becomes another ctrl
 setxkbmap -option ctrl:nocaps
 

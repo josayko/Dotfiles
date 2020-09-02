@@ -1,0 +1,13 @@
+language: bash
+
+sudo: required
+
+script:
+  - export GOROOT=
+  - echo GOROOT=$GOROOT
+  - ./shellcheck.sh
+  - sudo DEBUG=1 ./update-golang.sh
+  - sudo DEBUG=1 ./update-golang.sh
+  - ls -al /usr/local
+  - sudo DEBUG=1 ./update-golang.sh remove
+  - ls -al /usr/local

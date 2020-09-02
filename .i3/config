@@ -6,7 +6,7 @@
 #    By: jonny <josaykos@student.42.fr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/10 17:32:49 by jonny             #+#    #+#              #
-#    Updated: 2020/08/16 12:09:05 by jonny            ###   ########.fr        #
+#    Updated: 2020/09/02 19:00:09 by jonny            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_recency
+# bindsym $mod+d exec --no-startup-id dmenu_recency
+bindsym $mod+d exec --no-startup-id rofi -show run
 
 # launch categorized menu
 bindsym $mod+Shift+z exec --no-startup-id morc_menu
@@ -200,6 +201,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 # Open applications on specific workspaces
 assign [class="Alacritty"] $ws1
 assign [class="firefox"] $ws2
+assign [class="Google-chrome"] $ws2
 assign [class="Brave-browser"] $ws2
 assign [class="Pcmanfm"] $ws3
 assign [class="VirtualBox Manager"] $ws4
@@ -208,10 +210,10 @@ assign [class="Slack"] $ws5
 assign [class="discord"] $ws5
 assign [class="Thunderbird"] $ws6
 assign [class="Rambox"] $ws6
+assign [class="Emacs"] $ws7
+assign [class="libreoffice-calc"] $ws7
 assign [class="Spotify"] $ws8
-assign [class="spotify"] $ws8
 assign [class="Olivia"] $ws8
-# assign [class="Skype"] $ws5
 
 # Open specific applications in floating mode
 for_window [title="Calculator"] floating enable border normal
@@ -240,7 +242,7 @@ for_window [class="Simple-scan"] floating enable border normal
 for_window [class="(?i)System-config-printer.py"] floating enable border normal
 for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
+# for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 
 # switch to workspace with urgent window automatically
@@ -260,13 +262,14 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # Set shut down, restart and locking features
 bindsym $mod+0 mode "$mode_system"
-set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    #bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym l exec --no-startup-id $HOME/.scripts/betterlockscreen --lock blur
     bindsym s exec --no-startup-id i3exit suspend, mode "default"
     bindsym u exec --no-startup-id i3exit switch_user, mode "default"
     bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    # bindsym h exec --no-startup-id i3exit hibernate, mode "default"
     bindsym r exec --no-startup-id i3exit reboot, mode "default"
     bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
 
@@ -309,7 +312,6 @@ bindsym $mod+9 exec --no-startup-id $HOME/.scripts/betterlockscreen --lock blur
 #exec --no-startup-id xrandr --output eDP1 --auto --output DP2 --auto --scale 2x2 --right-of eDP1
 
 # Autostart applications
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id "$HOME/.scripts/dual-monitor"
 exec --no-startup-id sleep 1; picom -b
 exec --no-startup-id nextcloud
@@ -320,10 +322,12 @@ exec --no-startup-id xfce4-power-manager
 # exec --no-startup-id blueman-applet
 # exec --no-startup-id start_conky_maia
 exec --no-startup-id fcitx -d
-exec --no-startup-id xautolock -time 60 -locker "$HOME/.scripts/betterlockscreen --lock blur"
+exec --no-startup-id xautolock -detectsleep -time 60 -locker "$HOME/.scripts/betterlockscreen --lock blur"
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id alttab -w 1 -d 2
+exec --no-startup-id /usr/lib/polkit-1/polkitd --no-debug
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:

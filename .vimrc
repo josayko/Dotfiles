@@ -62,7 +62,7 @@ call plug#begin('~/.vim/plugged')
 " Optionnal Plugins
 " Plug 'tpope/vim-surround'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'tomlion/vim-solidity'
+" Plug 'tomlion/vim-solidity'
 " Plug 'majutsushi/tagbar'
 Plug 'lervag/vimtex'
 Plug 'sheerun/vim-polyglot'                     " Language highlighting pack
