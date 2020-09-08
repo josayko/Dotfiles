@@ -4,12 +4,12 @@
 "  \ V /| | | | | | | | | (__
 "   \_/ |_|_| |_| |_|_|  \___|
 "
-" VIM config file - Jonny Saykosy
-" Plugins managed by vimplug: https://github.com/junegunn/vim-plug
+" VIM config file - github.com/josayko
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 syntax on
 filetype plugin indent on
-
+set number relativenumber
 set encoding=UTF-8
 set mouse=a
 set nocompatible
@@ -25,16 +25,20 @@ set incsearch
 set hlsearch                " Highlight search results
 set nobackup
 set noswapfile
-set number relativenumber
 set timeoutlen=1000 ttimeoutlen=0
 set colorcolumn=81
 set cursorline
 set autochdir
-" set tags^=.git/tags;~		    " Look for ctags file in .git/
+set fillchars+=vert:\ 
+let g:auto_save = 1         " enable AutoSave on Vim startup
+let g:auto_save_silent = 1  " do not display the auto-save notification
+let g:netrw_banner = 0
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set smarttab
 
 set shiftwidth=2
@@ -51,106 +55,68 @@ autocmd FileType go,python setlocal shiftwidth=4 tabstop=4
 " Cursorline highlighting
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vim-plug For Managing Plugins
+" => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
+
+" Plugins managed by vimplug: https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
-
-" Optionnal Plugins
-" Plug 'tpope/vim-surround'
-Plug 'ludovicchabant/vim-gutentags'
-" Plug 'tomlion/vim-solidity'
-" Plug 'majutsushi/tagbar'
-Plug 'lervag/vimtex'
-Plug 'sheerun/vim-polyglot'                     " Language highlighting pack
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-
-" Themes Plugins
 Plug 'arcticicestudio/nord-vim'
-Plug 'vim-airline/vim-airline'				          " Airline
-
-" Essential Plugins
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " Auto-completion
-Plug 'honza/vim-snippets' 						          " Snippets
-Plug 'scrooloose/nerdtree'				              " NERDTree
-Plug 'kien/ctrlp.vim' 							            " Ctrl+P fuzzy finder
-Plug 'pbondoer/vim-42header' 					          " 42 Header
+Plug 'pbondoer/vim-42header'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
+Plug 'josa42/vim-lightline-coc'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'honza/vim-snippets'
+Plug 'kien/ctrlp.vim'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'airblade/vim-gitgutter' 					        " Git diff indicators
-Plug 'jiangmiao/auto-pairs' 					          " Autopairing brackets, parentheses, etc
-Plug 'ntpeters/vim-better-whitespace' 			    " Highlight trailing whitespaces in red
-
-Plug 'ryanoasis/vim-devicons' 					        " Filetype icons. Always load this plugin as the very last
-
+Plug 'jiangmiao/auto-pairs'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'majutsushi/tagbar'
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin options
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:auto_save = 1  " enable AutoSave on Vim startup
-let g:auto_save_silent = 1  " do not display the auto-save notification
+" vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#3B4252 ctermbg=0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3B4252 ctermbg=0
-set statusline+=%{gutentags#statusline()}
 
-" settings for vimtex
-let g:tex_flavor = 'latex'
-let g:vimtex_compiler_latexmk = {
-         \ 'build_dir' : 'build',
-         \}
-let g:vimtex_view_method = 'zathura'
-let g:vimtex_view_general_options
-    \ = '-reuse-instance -forward-search @tex @line @pdf'
-let g:vimtex_view_general_options_latexmk = '-reuse-instance'
-
-" settings for markdown-preview
-let g:mkdp_auto_close=0
-let g:mkdp_refresh_slow=1
-let g:mkdp_markdown_css='/home/jonny/.scripts/github-markdown.css'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Keymapping
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Moving between buffers
-nnoremap <C-W><C-H> :bprevious<CR>
-nnoremap <C-W><C-L> :bnext<CR>
-nnoremap <C-W><C-D> :bd<CR>
-nnoremap <C-W><C-O> :%bd\|e#\|bd#<CR>
-
-" Moving between panes
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" Ctags search in CtrlP
-nnoremap <leader>. :CtrlPTag<cr>
-
-" Tagbar
-nmap <F8> :TagbarToggle<CR>
-
-" Indent guides toggle
-nmap <F5> :IndentGuidesToggle<CR>
-
-" Toggle markdown preview in browser
-nmap <F2> <Plug>MarkdownPreviewToggle
-
-" Hit return in normal mode to disable highlighting word
-nnoremap <silent> <CR> :nohlsearch<CR><CR>
-
-" Enable/disable cursorline
-nnoremap <Leader>c :set cursorline!<CR>
+" lightline
+set laststatus=2
+set showtabline=2
+set noshowmode
+let g:lightline = {
+    \ 'colorscheme': 'one',
+    \ 'active': {
+    \      'left': [[ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ], [ 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]]
+    \   },
+    \ 'tabline': {
+    \   'left': [ ['buffers'] ],
+    \   'right': [ ['close'] ]
+    \ },
+    \ 'component_expand': {
+    \   'buffers': 'lightline#bufferline#buffers'
+    \ },
+    \ 'component_type': {
+    \   'buffers': 'tabsel'
+    \ }
+    \ }
+let g:lightline.component_raw = {'buffers': 1}
+let g:lightline#bufferline#unnamed = '[No Name]'
+let g:lightline#bufferline#min_buffer_count = 2
+let g:lightline#bufferline#clickable = 1
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+call lightline#coc#register()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Coc.nvim general configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " if hidden is not set, TextEdit might fail.
 set hidden
 
@@ -289,10 +255,45 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Keymapping
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Moving between buffers
+nnoremap <C-W><C-H> :bprevious<CR>
+nnoremap <C-W><C-L> :bnext<CR>
+nnoremap <C-W><C-D> :bd<CR>
+nnoremap <C-W><C-O> :%bd\|e#\|bd#<CR>
+
+" Moving between panes
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Ctags search in CtrlP
+nnoremap <leader>. :CtrlPTag<cr>
+
+" Tagbar
+nmap <F8> :TagbarToggle<CR>
+
+" Indent guides toggle
+nmap <F5> :IndentGuidesToggle<CR>
+
+" Toggle markdown preview in browser
+nmap <F2> <Plug>MarkdownPreviewToggle
+
+" Hit return in normal mode to disable highlighting word
+nnoremap <silent> <CR> :nohlsearch<CR><CR>
+
+" Enable/disable cursorline
+nnoremap <Leader>c :set cursorline!<CR>
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Theme and colors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Color scheme
+
 colorscheme nord
 
 " Same background as terminal
@@ -307,50 +308,4 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Powerline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Powerline
-set rtp+=/usr/share/powerline/bindings/vim/
 
-" Always show statusline
-set laststatus=2
-
-" Use 256 colours (Use this setting only if your terminal supports 256 colours)
-set t_Co=256
-
-let g:rehash256 = 1
-let g:Powerline_symbols='unicode'
-let g:Powerline_theme='long'
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme='nord'
-silent! call airline#extensions#whitespace#disable()
-
-" Uncomment to prevent non-normal modes showing in powerline and below powerline.
-set noshowmode
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => NERDTree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-let NERDTreeShowLineNumbers=1
-let NERDTreeShowHidden=1
-let NERDTreeMinimalUI = 1
-
-" automatically close NerdTree when you open a file
-let NERDTreeQuitOnOpen = 1
-
-" Automatically delete the buffer of the file you just deleted with NerdTree
-let NERDTreeAutoDeleteBuffer = 1
-
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Removes pipes | that act as seperators on splits
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set fillchars+=vert:\ 
