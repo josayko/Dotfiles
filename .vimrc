@@ -68,6 +68,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'josa42/vim-lightline-coc'
+Plug 'tpope/vim-fugitive'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'honza/vim-snippets'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -93,8 +94,11 @@ set noshowmode
 let g:lightline = {
     \ 'colorscheme': 'one',
     \ 'active': {
-    \      'left': [[ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ], [ 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]]
+    \   'left': [[ 'mode', 'paste' ], [ 'readonly', 'gitbranch', 'filename', 'modified' ], [ 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]]
     \   },
+    \  'component_function': {
+    \   'gitbranch': 'FugitiveHead'
+    \ },
     \ 'tabline': {
     \   'left': [ ['buffers'] ],
     \   'right': [ ['close'] ]
@@ -289,6 +293,8 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 " Enable/disable cursorline
 nnoremap <Leader>c :set cursorline!<CR>
 
+" Open netrw in horizontal split
+nnoremap <C-N> :Sexplore<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Theme and colors
