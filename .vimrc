@@ -32,7 +32,6 @@ set autochdir
 set fillchars+=vert:\ 
 let g:auto_save = 1         " enable AutoSave on Vim startup
 let g:auto_save_silent = 1  " do not display the auto-save notification
-let g:netrw_banner = 0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -63,6 +62,7 @@ hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=whi
 " Plugins managed by vimplug: https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
 Plug 'arcticicestudio/nord-vim'
+Plug 'preservim/nerdtree'
 Plug 'pbondoer/vim-42header'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'itchyny/lightline.vim'
@@ -77,11 +77,12 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'majutsushi/tagbar'
 Plug 'sheerun/vim-polyglot'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " vim-indent-guides
-let g:indent_guides_enable_on_vim_startup = 0
-let g:indent_guides_start_level = 2
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#3B4252 ctermbg=0
@@ -116,6 +117,31 @@ let g:lightline#bufferline#min_buffer_count = 2
 let g:lightline#bufferline#clickable = 1
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 call lightline#coc#register()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Uncomment to autostart the NERDTree
+" autocmd vimenter * NERDTree
+
+map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let NERDTreeShowLineNumbers=1
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI = 1
+
+" automatically close NerdTree when you open a file
+let NERDTreeQuitOnOpen = 1
+
+" Automatically delete the buffer of the file you just deleted with NerdTree
+let NERDTreeAutoDeleteBuffer = 1
+
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Coc.nvim general configuration
@@ -293,8 +319,6 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 " Enable/disable cursorline
 nnoremap <Leader>c :set cursorline!<CR>
 
-" Open netrw in horizontal split
-nnoremap <C-N> :Sexplore<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Theme and colors
