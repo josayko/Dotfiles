@@ -1,0 +1,243 @@
+134c134
+< bindsym $mod+d exec --no-startup-id dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=28'
+---
+> bindsym $mod+shift+d exec --no-startup-id dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
+143c143
+< bindsym $mod+F11 exec --no-startup-id rofi -show run -fullscreen -font "Noto Sans 26"
+---
+> bindsym $mod+F11 exec --no-startup-id rofi -show run -fullscreen -font "Noto Sans 13"
+146c146
+< bindsym $mod+F12 exec --no-startup-id rofi -show run -font "Noto Sans 26"
+---
+> bindsym $mod+F12 exec --no-startup-id rofi -show run -font "Noto Sans 13"
+293c293
+< #bindsym $mod+shift+d focus child
+---
+> #bindsym $mod+d focus child
+356,357c356,357
+< assign [class="Firefox|Brave-browser"] → 1
+< assign [class="Chromium|Google-chrome"] → 1
+---
+> #assign [class="Firefox|Vivaldi-stable|Vivaldi-snapshot|Opera"]                      → 1
+> #assign [class="Chromium|Google-chrome"]                                             → 1
+381c381
+< assign [class="Nemo|Thunar|Caja|nautilus|Nautilus"]                                 → 8
+---
+> #assign [class="Nemo|Thunar|Caja|nautilus|Nautilus"]                                 → 8
+387c387
+< assign [class="Spotify|spotify"]                                                    → 10
+---
+> #assign [class="Spotify|spotify"]                                                    → 10
+389c389
+< for_window [class="Spotify"] move to workspace 10
+---
+> #for_window [class="Spotify"] move to workspace 10
+401c401
+< #exec --no-startup-id dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
+---
+> exec --no-startup-id dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
+407,408c407,408
+< #exec --no-startup-id brave
+< for_window [class="Brave-browser"] focus
+---
+> #exec --no-startup-id vivaldi-stable
+> for_window [class="Vivaldi-stable"] focus
+435c435
+< #exec --no-startup-id pamac-tray
+---
+> exec --no-startup-id pamac-tray
+438c438
+< exec --no-startup-id blueberry-tray
+---
+> #exec --no-startup-id blueberry-tray
+444c444,447
+< exec_always --no-startup-id numlockx off
+---
+> exec_always --no-startup-id numlockx on
+> 
+> # dropbox
+> #exec --no-startup-id dropbox start
+449,451d451
+< # Nextcloud
+< exec --no-startup-id nextcloud
+< 
+463c463
+< #exec --no-startup-id conky -c ~/.config/i3/system-overview
+---
+> exec --no-startup-id conky -c ~/.config/i3/system-overview
+466c466
+< exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/japanese-street.png &
+---
+> exec --no-startup-id feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &
+494,496c494,496
+< #bindsym $mod+c exec --no-startup-id conky-toggle
+< #bindsym control+mod1+Next exec --no-startup-id conky-rotate -n
+< #bindsym control+mod1+Prior exec --no-startup-id conky-rotate -p
+---
+> bindsym $mod+c exec --no-startup-id conky-toggle
+> bindsym control+mod1+Next exec --no-startup-id conky-rotate -n
+> bindsym control+mod1+Prior exec --no-startup-id conky-rotate -p
+499,503c499,503
+< bindsym $mod+Return exec --no-startup-id alacritty;focus
+< bindsym $mod+KP_Enter exec --no-startup-id alacritty;focus
+< bindsym control+mod1+t exec --no-startup-id alacritty; focus
+< bindsym control+mod1+Return exec --no-startup-id alacritty; focus
+< bindsym control+mod1+KP_Enter exec --no-startup-id alacritty; focus
+---
+> bindsym $mod+Return exec --no-startup-id termite;focus
+> bindsym $mod+KP_Enter exec --no-startup-id termite;focus
+> bindsym control+mod1+t exec --no-startup-id termite; focus
+> bindsym control+mod1+Return exec --no-startup-id termite; focus
+> bindsym control+mod1+KP_Enter exec --no-startup-id termite; focus
+550c550
+< bindsym control+mod1+b exec --no-startup-id brave;focus
+---
+> bindsym control+mod1+v exec --no-startup-id vivaldi-stable;focus
+578c578
+< #bindsym control+mod1+b exec --no-startup-id thunar;focus
+---
+> bindsym control+mod1+b exec --no-startup-id thunar;focus
+870,995c870,871
+< bar {
+< 
+<     height 50
+<     workspace_buttons yes
+<     font pango:Noto Sans 14
+< 
+<     #position top
+<     position bottom
+< 
+<     #system icons
+<     #tray_output none
+<     tray_output $firstMonitor
+<     #tray_output $secondMonitor
+< 
+< 
+< 
+<     # OPTION 1 : i3status
+< 
+<     # type status_command i3status without the config file and
+<     # you will get the standard i3status bar
+<     # Second one is the standard statusbar with my personal settings
+< 
+<     #status_command i3status
+<     #status_command i3status -c ~/.config/i3/i3status.conf
+< 
+< 
+< 
+<     # OPTION 2 : i3blocks
+< 
+<     # https://github.com/vivien/i3blocks
+<     # another way to provide text in the statusbar
+<     # put hastag in front if not installed
+< 
+<     #status_command i3blocks
+<     #status_command i3blocks -c ~/.config/i3/i3blocks.conf
+<     #status_command i3blocks -c ~/.config/i3/i3blocks-rainbow.conf
+<     #status_command i3blocks -c ~/.config/i3/i3blocks-original.conf
+<     #status_command i3blocks -c ~/.config/i3/i3blocks-awesome.conf
+< 
+< 
+<     # OPTION 3 : conky
+< 
+<     # You can also replace the istatus bar with a conky
+<     # start-conky-i3statusbar.sh is started and conky will follow
+<     # documentation : https://i3wm.org/docs/user-contributed/conky-i3bar.html
+<     # conky configuration is in conky-i3statusbar
+< 
+<     #status_command ~/.config/i3/start-conky-i3statusbar.sh
+< 
+< 
+< 
+<     # OPTION 4 : polybar
+< 
+<     # polybar is launched elsewhere - search for the word
+<     # from the opening of the "bar {...}" till the end has to go or hashtagged out
+<     # in order for the system trayicons to show up in polybar
+< 
+< 
+<     ##START THEMING BAR
+<     #Theme name : ArcoLinux Var Nord
+< 
+<     # i3 bar colors
+<     # variable border background Text
+< 
+<     # Nord theme colors
+<     # https://www.nordtheme.com/docs/colors-and-palettes
+< 
+<     set $nord0   #2E3440
+<     set $nord1   #3B4252
+<     set $nord2   #434C5E
+<     set $nord3   #4C566A
+<     set $nord4   #D8DEE9
+<     set $nord5   #E5E9F0
+<     set $nord6   #ECEFF4
+<     set $nord7   #8FBCBB
+<     set $nord8   #88C0D0
+<     set $nord9   #81A1C1
+<     set $nord10  #5E81AC
+<     set $nord11  #BF616A
+<     set $nord12  #D08770
+<     set $nord13  #EBCB8B
+<     set $nord14  #A3BE8C
+<     set $nord15  #B48EAD
+< 
+<     colors {
+<         background $nord0
+<         statusline $nord9
+<         separator  $nord10
+< 
+<         # colorclass           border  backgr. text
+<         focused_workspace     $nord3   $nord8  $nord4
+<         active_workspace      $nord3   $nord8  $nord4
+<         inactive_workspace    $nord8   $nord10 $nord4
+<         urgent_workspace      $nord3   $nord11 $nord4
+<         }
+< 
+<     }
+<     ##STOP THEMING BAR
+< 
+<     ##START THEMING WM
+<     #Theme name : ArcoLinux Var Nord
+< 
+<     set $nord0   #2E3440
+<     set $nord1   #3B4252
+<     set $nord2   #434C5E
+<     set $nord3   #4C566A
+<     set $nord4   #D8DEE9
+<     set $nord5   #E5E9F0
+<     set $nord6   #ECEFF4
+<     set $nord7   #8FBCBB
+<     set $nord8   #88C0D0
+<     set $nord9   #81A1C1
+<     set $nord10  #5E81AC
+<     set $nord11  #BF616A
+<     set $nord12  #D08770
+<     set $nord13  #EBCB8B
+<     set $nord14  #A3BE8C
+<     set $nord15  #B48EAD
+< 
+<     # Window color settings
+<     # class                 border  backgr. text    indicator
+<     client.focused          $nord15 $nord15 $nord4  $nord15
+<     client.unfocused        $nord2  $nord2  $nord6  $nord2
+<     client.focused_inactive $nord2  $nord2  $nord6  $nord2
+<     client.placeholder      $nord2  $nord2  $nord6  $nord2
+<     client.urgent           #d42121 #d42121 #f7f7f7 #d42121
+---
+> ##START THEMING WM
+> #Theme name : ArcoLinux Default
+997c873,879
+<     client.background       $nord04
+---
+>   # class                 border  backgr. text    indicator
+>   client.placeholder      #242424 #242424 #242424
+>   client.background       #242424 #242424 #242424
+>   client.focused          #6790EB #6790EB #e5e5e5 #6790EB
+>   client.unfocused        #222222 #222222 #aaaaaa #222222
+>   client.focused_inactive #222222 #222222 #a9a9a9 #222222
+>   client.urgent           #d42121 #d42121 #f7f7f7 #d42121
+999c881
+<     ##STOP THEMING WM
+---
+> ##STOP THEMING WM
