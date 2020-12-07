@@ -6,6 +6,7 @@ export BROWSER=/usr/bin/brave
 
 export EDITOR=vim
 export MAIL=josaykos@student.42.fr
+export GPG_TTY=$(tty)
 
 # Hidpi Fixes
 export GDK_SCALE=2
@@ -23,7 +24,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export GOBIN=~/go/bin/
 
 # Kubectl config
-export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config.minikube:$HOME/.kube/config
+# export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config.minikube:$HOME/.kube/config
 
 # Add colors to man
 export LESS_TERMCAP_mb=$'\e[1;32m' export LESS_TERMCAP_md=$'\e[1;32m'
