@@ -11,7 +11,7 @@ syntax on
 filetype plugin indent on
 set number relativenumber
 set encoding=UTF-8
-set mouse=a
+set mouse=r
 set nocompatible
 set showmatch               " Show matching brackets.
 set ignorecase              " Do case insensitive matching
@@ -338,4 +338,4 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-
+hi! CocErrorHighlight ctermfg=red ctermbg=grey guifg=#bf616a guibg=#3b4252
