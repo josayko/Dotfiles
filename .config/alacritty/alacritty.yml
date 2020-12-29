@@ -1,15 +1,15 @@
 env:
   TERM: xterm-256color
 window:
-  startup_mode: Maximized
+  startup_mode: Windowed
   padding:
     x: 7
-    'y': 7
+    y: 7
 font:
   normal:
     family: JetBrainsMono Nerd Font Mono
   size: 10
-background_opacity: 0.95
+background_opacity: 1
 colors:
   primary:
     background: '#2e3440'
