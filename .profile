@@ -1,48 +1,49 @@
-# Caps Lock becomes another ctrl
-setxkbmap -option ctrl:nocaps
+# ~/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# exists.
+# see /usr/share/doc/bash/examples/startup-files for examples.
+# the files are located in the bash-doc package.
 
-# fix "xdg-open fork-bomb" export your preferred browser from here
-export BROWSER=/usr/bin/brave
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+#umask 022
 
-export EDITOR=vim
-export MAIL=josaykos@student.42.fr
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+# if [ -d "$HOME/.local/bin" ] ; then
+#     PATH="$HOME/.local/bin:$PATH"
+# fi
+
+export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/share/bin:$PATH"
+
+export AUDIODRIVER=alsa
 export GPG_TTY=$(tty)
 
-# Hidpi Fixes
-export GDK_SCALE=2
-export GDK_DPI_SCALE=0.5
-export QT_AUTO_SCREEN_SCALE_FACTOR=1
-export LD_PRELOAD=/usr/lib/libwcwidth-icons.so
+# MAIL / USER
+export MAIL=josaykos@student.42.fr
+export GOBIN=$HOME/go/bin/
 
-# General PATH
-export PATH=$HOME/.local/share/bin:$HOME/Applications:$HOME/.config/coc/extensions/coc-clangd-data/install/10.0.0/clangd_10.0.0/bin:/usr/local/go/bin:$HOME/go/bin:/home/jonny/.gem/ruby/2.7.0/bin:$PATH
+eval "$(rbenv init -)"
+source "$HOME/.cargo/env"
 
-# Yarn
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-# Go
-export GOBIN=~/go/bin/
-
-# Kubectl config
-# export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config.minikube:$HOME/.kube/config
+#Aliases
+alias norm2="~/.norminette/norminette.rb"
+alias open=xdg-open
 
 # Add colors to man
 export LESS_TERMCAP_mb=$'\e[1;32m' export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m' export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m' export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
-
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
-
-# Japanese input
-export QT_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx
-export GTK_IM_MODULE=fcitx
-
-# Norminette
-alias norminette="~/.norminette/norminette.rb"
-
-alias kg="kubectl get"
-
-unsetopt AUTO_CD
-ufetch-arco

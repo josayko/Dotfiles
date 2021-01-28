@@ -62,6 +62,7 @@ hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=whi
 " Plugins managed by vimplug: https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
 Plug 'arcticicestudio/nord-vim'
+Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'pbondoer/vim-42header'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -118,6 +119,8 @@ let g:lightline#bufferline#clickable = 1
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 call lightline#coc#register()
 
+" :Prettier Command
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => NERDTree
